@@ -9,13 +9,10 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import ScrollToTop from "./components/ScrollToTop";
 
-// Debug info to console
 console.log("App.tsx is loading");
 console.log("Current URL:", window.location.href);
 console.log("Current path:", window.location.pathname);
 console.log("Current hash:", window.location.hash);
-
-// Error boundary to catch rendering errors
 class ErrorBoundary extends Component<
   { children: React.ReactNode },
   { hasError: boolean; error: Error | null }
@@ -78,7 +75,6 @@ function App() {
   const scrollTimeout = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    // Log to help debug
     console.log("App component mounted");
 
     const mainElement = mainRef.current;
@@ -95,10 +91,7 @@ function App() {
       scrollTimeout.current = setTimeout(() => {
         const currentScrollY = mainElement.scrollTop;
 
-        // Update scroll state with a higher threshold
         setIsScrolled(currentScrollY > 150);
-
-        // Update last scroll position
         lastScrollY.current = currentScrollY;
       }, 10);
     };
@@ -127,7 +120,6 @@ function App() {
         <Router>
           <ScrollToTop />
           <div className="App">
-            {/* Debug info - Keep this for now until site works correctly */}
             <div
               id="debug-info"
               style={{
@@ -151,13 +143,10 @@ function App() {
               Hash: {window.location.hash}
             </div>
 
-            {/* Render check - Force React to render */}
             <div style={{ display: "none" }}>
               {new Date().toISOString()}
               {window.location.href}
             </div>
-
-            {/* Theme subtle decorative elements */}
             <div className="theme-elements">
               <div className="theme-leaf"></div>
               <div className="theme-leaf"></div>
@@ -165,14 +154,12 @@ function App() {
               <div className="theme-wave"></div>
             </div>
 
-            {/* Sticky header - appears when scrolled */}
             <header className={`sticky-header ${isScrolled ? "visible" : ""}`}>
               <h1 className="text-center text-glow font-trojan w-full">
                 ⚜ Ronit Shah ⚜
               </h1>
             </header>
 
-            {/* Main Content */}
             <main
               ref={mainRef}
               className="scroll-container-no-nav overflow-auto"
@@ -378,19 +365,15 @@ function App() {
                           <div className="blog-preview">
                             <div className="blog-card">
                               <div className="p-6">
-                                <div className="blog-date">May 2, 2025</div>
+                                <div className="blog-date">June 8, 2025</div>
                                 <h3 className="text-xl font-trojan mb-2">
-                                  Welcome to My Blog
+                                  Doing More While Doing Less
                                 </h3>
                                 <p className="blog-excerpt">
-                                  Join me as I share insights from my journey in
-                                  game development and programming. I'll be
-                                  documenting my experiences, learnings, and
-                                  thoughts on various aspects of software
-                                  development and game creation...
+                                  This year's been weird. Good weird, but weird. Starting from January, I went into full "I'll do everything by myself" mode. Built a strict, rigid timetable. Talked to fewer people. Had these huge goals and plans all lined up...
                                 </p>
                                 <Link
-                                  to="/blog"
+                                  to="/blog/doing-more-while-doing-less"
                                   className="fancy-link inline-block mt-4 font-semibold"
                                 >
                                   Read More
@@ -400,13 +383,10 @@ function App() {
                             <div className="blog-card bg-gradient-to-br from-autumn-50 to-forest-50">
                               <div className="p-6 flex flex-col items-center justify-center h-full">
                                 <h3 className="text-xl font-trojan mb-4 text-forest-700">
-                                  More Posts Coming Soon
+                                  Blogs Every Sunday
                                 </h3>
                                 <p className="text-forest-600 text-center">
-                                  Upcoming articles about game development,
-                                  programming insights, project updates, and my
-                                  experiences with open source contributions.
-                                  Follow me on X for regular updates.
+                                  New content is published weekly every Sunday. Next week: How I built Conway's Game of Life in the terminal. Follow for regular updates on game development, programming, and life.
                                 </p>
                               </div>
                             </div>

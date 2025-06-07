@@ -11,7 +11,6 @@ const Blog: React.FC = () => {
   useEffect(() => {
     try {
       const allPosts = loadAllBlogPosts();
-      // Sort posts by date (newest first)
       const sortedPosts = allPosts.sort((a, b) => 
         new Date(b.date).getTime() - new Date(a.date).getTime()
       );
@@ -23,7 +22,6 @@ const Blog: React.FC = () => {
     }
   }, []);
 
-  // Schema markup for blog
   const blogSchema = {
     "@context": "https://schema.org",
     "@type": "Blog",
@@ -54,18 +52,15 @@ const Blog: React.FC = () => {
         <meta name="description" content="Explore insights, tutorials, and experiences in game development, programming, and technical deep-dives." />
         <meta name="keywords" content="game development blog, programming tutorials, game engine development, OpenGL, Vulkan, C++" />
         
-        {/* Open Graph tags */}
         <meta property="og:title" content="GameDev Blog - Technical Insights and Tutorials" />
         <meta property="og:description" content="Dive into game development, programming tutorials, and technical deep-dives." />
         <meta property="og:type" content="blog" />
         <meta property="og:url" content="https://ronit9320.github.io/blog" />
         
-        {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="GameDev Blog - Technical Insights" />
         <meta name="twitter:description" content="Explore game development, programming tutorials, and technical deep-dives." />
         
-        {/* Schema.org markup */}
         <script type="application/ld+json">
           {JSON.stringify(blogSchema)}
         </script>
@@ -140,26 +135,19 @@ const Blog: React.FC = () => {
                     </div>
                   </article>
                 ))}
+                
+                <article className="blog-card mb-10 bg-gradient-to-br from-autumn-50 to-forest-50">
+                  <div className="p-6 text-center">
+                    <h2 className="text-xl font-trojan mb-4 text-forest-700">Blogs Every Sunday</h2>
+                    <p className="text-forest-600 mb-4">
+                      New content is published every Sunday. Next week: How I built Conway's Game of Life in the terminal.
+                      <br/><br/>
+                      Stay tuned for more thoughts on game development, programming, and life.
+                    </p>
+                  </div>
+                </article>
               </>
             )}
-            
-            <article className="blog-card mb-10">
-              <div className="p-6 text-center">
-                <h2 className="text-xl font-trojan mb-3">More Posts Coming Soon</h2>
-                <p className="blog-excerpt mb-4">
-                  Upcoming articles will cover various topics including:
-                  <br/><br/>
-                  • Game Development Experiences<br/>
-                  • Programming Insights<br/>
-                  • Project Updates<br/>
-                  • Learning Journey<br/>
-                  • Industry Thoughts<br/>
-                  • Open Source Contributions<br/>
-                  <br/>
-                  Follow me on X for regular updates and new blog posts.
-                </p>
-              </div>
-            </article>
           </div>
         </div>
       </section>
