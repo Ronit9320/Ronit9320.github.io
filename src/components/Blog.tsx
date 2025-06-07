@@ -78,12 +78,6 @@ const Blog: React.FC = () => {
             Technical insights, tutorials, and experiences from my journey in game development and programming.
           </p>
           
-          <div className="flex justify-center mb-8">
-            <Link to="/blog/new" className="submit-button">
-              Create New Post
-            </Link>
-          </div>
-          
           <div className="mythical-divider mx-auto w-3/4 mb-12"></div>
           
           <div className="max-w-4xl mx-auto">

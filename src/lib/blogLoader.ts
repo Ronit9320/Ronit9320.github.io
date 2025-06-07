@@ -20,6 +20,9 @@ const blogPostFiles: Record<string, string> = {
 export function loadAllBlogPosts(): BlogPost[] {
   return Object.entries(blogPostFiles).map(([slug, content], index) => {
     const post = markdownToBlogPost(content, (index + 1).toString());
+    if (post) {
+      post.slug = slug;
+    }
     return post;
   }).filter(Boolean) as BlogPost[];
 }

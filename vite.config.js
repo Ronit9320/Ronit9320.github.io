@@ -4,7 +4,8 @@ import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react()],
-    base: '', // Empty string for relative paths with gh-pages
+    assetsInclude: ['**/*.md'],
+    base: '', // Empty string for root domain deployment with gh-pages
     root: '.',
     publicDir: 'public',
     resolve: {
@@ -21,20 +22,12 @@ export default defineConfig({
         sourcemap: true,
         // Ensure relative paths for assets
         assetsDir: 'assets',
-        minify: 'terser', // Use terser for better minification
-        terserOptions: {
-            compress: {
-                drop_console: false, // Keep console for debugging
-                drop_debugger: true,
-            },
-        },
         rollupOptions: {
             output: {
-                // Use stable filenames without content hashes
-                assetFileNames: 'assets/[name][extname]',
-                chunkFileNames: 'assets/[name].js',
-                entryFileNames: 'assets/index.js',
-                manualChunks: undefined, // Don't split into chunks for small site
+                // Ensure proper URL for assets without hostname
+                assetFileNames: 'assets/[name]-[hash][extname]',
+                chunkFileNames: 'assets/[name]-[hash].js',
+                entryFileNames: 'assets/[name]-[hash].js',
             }
         }
     },
