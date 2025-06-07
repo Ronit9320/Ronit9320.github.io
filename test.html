@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Pages Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .container {
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #333;
+    }
+    .success {
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Static HTML Test Page</h1>
+    <p class="success">✅ If you can see this page, your GitHub Pages server is working correctly for static HTML files.</p>
+    <p>If you can see this page but not your React app, the issue is likely in your React application, not in your GitHub Pages setup.</p>
+    
+    <h2>Useful Links</h2>
+    <ul>
+      <li><a href="./">Go to Homepage</a></li>
+      <li><a href="./debug.html">Go to Debug Page</a></li>
+    </ul>
+    
+    <p>Current Time: <span id="current-time"></span></p>
+    
+    <script>
+      // Display current time to show dynamic JavaScript is working
+      document.getElementById('current-time').textContent = new Date().toLocaleString();
+    </script>
+  </div>
+</body>
+</html> 
