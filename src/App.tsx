@@ -5,6 +5,7 @@ import "./App.css";
 import Projects from "./components/Projects";
 import Blog from "./components/Blog";
 import BlogPost from "./components/BlogPost";
+import BlogEditor from "./components/BlogEditor";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import ScrollToTop from "./components/ScrollToTop";
@@ -210,6 +211,9 @@ function App() {
                           <div className="flex justify-center space-x-6 flex-wrap gap-4 mt-4">
                             <Link to="/projects" className="submit-button">
                               View Projects
+                            </Link>
+                            <Link to="/blog" className="submit-button">
+                              Blog
                             </Link>
                             <Link to="/contact" className="submit-button">
                               Get in Touch
@@ -442,6 +446,7 @@ function App() {
                 />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/new" element={<BlogEditor />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />

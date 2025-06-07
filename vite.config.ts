@@ -5,6 +5,7 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  assetsInclude: ['**/*.md'],
   base: '', // Empty string for root domain deployment with gh-pages
   root: '.',
   publicDir: 'public',
