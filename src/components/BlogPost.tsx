@@ -45,6 +45,14 @@ const BlogPost: React.FC = () => {
     "keywords": post.tags.join(", ")
   } : null;
 
+  // CSS to hide the first heading in the blog content
+  const hideFirstHeadingStyle = `
+    .markdown-content h1:first-of-type,
+    .markdown-content h2:first-of-type {
+      display: none;
+    }
+  `;
+
   return (
     <>
       {post && (
@@ -70,6 +78,9 @@ const BlogPost: React.FC = () => {
               {JSON.stringify(postSchema)}
             </script>
           )}
+          
+          {/* Custom style to hide first heading */}
+          <style>{hideFirstHeadingStyle}</style>
         </Helmet>
       )}
 
@@ -88,7 +99,7 @@ const BlogPost: React.FC = () => {
               </div>
             ) : !post ? (
               <div className="blog-card p-6 text-center">
-                <h2 className="text-xl font-trojan mb-3">Post Not Found</h2>
+                <h2 className="text-xl section-title mb-3">Post Not Found</h2>
                 <p className="mb-4">Sorry, the blog post you're looking for couldn't be found.</p>
                 <Link to="/blog" className="fancy-link">
                   Browse all posts
@@ -97,30 +108,35 @@ const BlogPost: React.FC = () => {
             ) : (
               <article className="blog-card" itemScope itemType="https://schema.org/BlogPosting">
                 <div className="p-6">
-                  <div className="blog-date mb-2" itemProp="datePublished">
-                    {new Date(post.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </div>
-                  <div className="flex items-center gap-2 mb-6">
-                    <h1 className="text-3xl font-trojan text-glow" itemProp="headline">
-                      {post.title}
-                    </h1>
-                    <span className="text-gray-400">•</span>
+                  <div className="flex justify-end mb-4">
                     <span className="text-sm text-gray-600">{post.readingTime}</span>
                   </div>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {post.tags.map((tag, index) => (
-                      <span key={index} className="project-tag">{tag}</span>
-                    ))}
-                  </div>
+                  
+                  <h1 className="text-3xl section-title text-glow text-center mb-6" itemProp="headline">
+                    {post.title}
+                  </h1>
+                  
                   <div 
-                    className="prose prose-lg max-w-none markdown-content"
+                    className="prose prose-lg max-w-none markdown-content mb-8"
                     itemProp="articleBody"
                     dangerouslySetInnerHTML={{ __html: post.content }}
                   />
+                  
+                  <div className="border-t border-gray-700 pt-4 mt-8">
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {post.tags.map((tag, index) => (
+                        <span key={index} className="project-tag">{tag}</span>
+                      ))}
+                    </div>
+                    
+                    <div className="blog-date" itemProp="datePublished">
+                      {new Date(post.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </div>
+                  </div>
                 </div>
               </article>
             )}
