@@ -1,60 +1,59 @@
-import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { useNavigate } from 'react-router-dom';
-import { BlogPost } from '../lib/blogUtils';
-import { markdownToBlogPost } from '../lib/markdownUtils';
+import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
+import { BlogPost } from "../lib/blogUtils";
+import { markdownToBlogPost } from "../lib/markdownUtils";
 
-// In a real application, this would save to a database or CMS
-// For this demo, we'll just simulate saving
 const BlogEditor: React.FC = () => {
   const navigate = useNavigate();
-  const [title, setTitle] = useState('');
-  const [slug, setSlug] = useState('');
-  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
-  const [excerpt, setExcerpt] = useState('');
-  const [content, setContent] = useState('');
-  const [tags, setTags] = useState('');
-  const [readingTime, setReadingTime] = useState('5 min read');
+  const [title, setTitle] = useState("");
+  const [slug, setSlug] = useState("");
+  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
+  const [excerpt, setExcerpt] = useState("");
+  const [content, setContent] = useState("");
+  const [tags, setTags] = useState("");
+  const [readingTime, setReadingTime] = useState("5 min read");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [preview, setPreview] = useState<BlogPost | null>(null);
 
   const handleSlugChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Convert title to slug format (lowercase, replace spaces with hyphens, remove special chars)
     const newSlug = e.target.value
       .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '');
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
     setSlug(newSlug);
   };
 
   const generateSlugFromTitle = () => {
     const newSlug = title
       .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '');
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
     setSlug(newSlug);
   };
 
   const handlePreview = () => {
     try {
-      // Create markdown content with frontmatter
       const markdown = `---
 title: ${title}
 slug: ${slug}
 date: ${date}
 excerpt: ${excerpt}
-tags: [${tags.split(',').map(tag => `"${tag.trim()}"`).join(', ')}]
+tags: [${tags
+          .split(",")
+          .map((tag) => `"${tag.trim()}"`)
+          .join(", ")}]
 readingTime: ${readingTime}
 ---
 
 ${content}`;
 
-      const post = markdownToBlogPost(markdown, 'preview');
+      const post = markdownToBlogPost(markdown, "preview");
       setPreview(post);
-      setError('');
+      setError("");
     } catch (err) {
-      setError('Error generating preview');
+      setError("Error generating preview");
       console.error(err);
     }
   };
@@ -62,7 +61,7 @@ ${content}`;
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setError('');
+    setError("");
 
     try {
       // Create markdown content with frontmatter
@@ -71,23 +70,22 @@ title: ${title}
 slug: ${slug}
 date: ${date}
 excerpt: ${excerpt}
-tags: [${tags.split(',').map(tag => `"${tag.trim()}"`).join(', ')}]
+tags: [${tags
+          .split(",")
+          .map((tag) => `"${tag.trim()}"`)
+          .join(", ")}]
 readingTime: ${readingTime}
 ---
 
 ${content}`;
 
-      // In a real application, this would save to a database or CMS
-      // For this demo, we'll just log it
-      console.log('Saving blog post:', markdown);
+      console.log("Saving blog post:", markdown);
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // Navigate to the blog post
       navigate(`/blog/${slug}`);
     } catch (err) {
-      setError('Error saving blog post');
+      setError("Error saving blog post");
       console.error(err);
     } finally {
       setIsSubmitting(false);
@@ -102,8 +100,10 @@ ${content}`;
 
       <section className="section">
         <div className="container mx-auto">
-          <h1 className="section-title text-center text-glow">Create New Blog Post</h1>
-          
+          <h1 className="section-title text-center text-glow">
+            Create New Blog Post
+          </h1>
+
           <div className="max-w-4xl mx-auto">
             {error && (
               <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
@@ -186,7 +186,10 @@ ${content}`;
                 </div>
 
                 <div className="mb-4">
-                  <label htmlFor="readingTime" className="block mb-2 font-semibold">
+                  <label
+                    htmlFor="readingTime"
+                    className="block mb-2 font-semibold"
+                  >
                     Reading Time
                   </label>
                   <input
@@ -227,7 +230,7 @@ ${content}`;
                     className="submit-button"
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Saving...' : 'Save Post'}
+                    {isSubmitting ? "Saving..." : "Save Post"}
                   </button>
                 </div>
               </div>
@@ -239,18 +242,16 @@ ${content}`;
                 <article className="blog-card">
                   <div className="p-6">
                     <div className="blog-date mb-2">
-                      {new Date(preview.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
+                      {new Date(preview.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
                       })}
                     </div>
                     <h2 className="text-xl font-trojan mb-3">
                       {preview.title}
                     </h2>
-                    <p className="blog-excerpt mb-4">
-                      {preview.excerpt}
-                    </p>
+                    <p className="blog-excerpt mb-4">{preview.excerpt}</p>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {preview.tags.map((tag, index) => (
                         <span key={index} className="project-tag">
@@ -258,9 +259,11 @@ ${content}`;
                         </span>
                       ))}
                       <span className="text-gray-400">•</span>
-                      <span className="text-sm text-gray-600">{preview.readingTime}</span>
+                      <span className="text-sm text-gray-600">
+                        {preview.readingTime}
+                      </span>
                     </div>
-                    <div 
+                    <div
                       className="prose prose-lg max-w-none markdown-content"
                       dangerouslySetInnerHTML={{ __html: preview.content }}
                     />
@@ -275,4 +278,4 @@ ${content}`;
   );
 };
 
-export default BlogEditor; 
+export default BlogEditor;
