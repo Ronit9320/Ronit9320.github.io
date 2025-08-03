@@ -1,0 +1,14 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://ronit9320.github.io/sitemap.xml
+
+# Disallow crawling of any potential admin or private routes
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+
+# Crawl delay to prevent server overload
+Crawl-delay: 10 

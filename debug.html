@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debug Page</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    pre {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+    .success {
+      color: green;
+      font-weight: bold;
+    }
+    h1 {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    h2 {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>GitHub Pages Debug Information</h1>
+  
+  <h2>Page URL Information</h2>
+  <pre id="url-info"></pre>
+  
+  <h2>Asset Loading Test</h2>
+  <div id="asset-test-results"></div>
+  
+  <h2>Console Errors</h2>
+  <pre id="console-errors">Checking for errors...</pre>
+  
+  <h2>DOM Check</h2>
+  <pre id="dom-check"></pre>
+  
+  <h2>Environment</h2>
+  <pre id="environment"></pre>
+
+  <h2>Links to Test</h2>
+  <ul>
+    <li><a href="./" id="home-link">Home Page</a></li>
+    <li><a href="./test.html" id="test-link">Basic Test Page</a></li>
+    <li><a href="./projects" id="projects-link">Projects Page (SPA route)</a></li>
+    <li><a href="./notfound" id="notfound-link">Not Found Page (should redirect)</a></li>
+  </ul>
+  
+  <script>
+    // Display URL information
+    function displayUrlInfo() {
+      const urlInfo = document.getElementById('url-info');
+      urlInfo.textContent = `Current URL: ${window.location.href}
+Protocol: ${window.location.protocol}
+Hostname: ${window.location.hostname}
+Pathname: ${window.location.pathname}
+Hash: ${window.location.hash}
+Search: ${window.location.search}`;
+    }
+    
+    // Test asset loading
+    function testAssetLoading() {
+      const results = document.getElementById('asset-test-results');
+      const assets = [
+        { type: 'CSS', url: './assets/index.css' },
+        { type: 'JavaScript', url: './assets/index.js' },
+        { type: 'Image', url: './favicon.svg' }
+      ];
+      
+      results.innerHTML = '<ul></ul>';
+      const list = results.querySelector('ul');
+      
+      assets.forEach(asset => {
+        const li = document.createElement('li');
+        const statusSpan = document.createElement('span');
+        
+        statusSpan.textContent = 'Testing...';
+        li.textContent = `${asset.type} (${asset.url}): `;
+        li.appendChild(statusSpan);
+        list.appendChild(li);
+        
+        fetch(asset.url)
+          .then(response => {
+            if (response.ok) {
+              statusSpan.textContent = 'Loaded successfully';
+              statusSpan.className = 'success';
+            } else {
+              statusSpan.textContent = `Failed with status ${response.status}`;
+              statusSpan.className = 'error';
+            }
+          })
+          .catch(error => {
+            statusSpan.textContent = `Error: ${error.message}`;
+            statusSpan.className = 'error';
+          });
+      });
+    }
+    
+    // Collect console errors
+    function captureConsoleErrors() {
+      const errors = [];
+      const oldConsoleError = console.error;
+      
+      console.error = function() {
+        errors.push(Array.from(arguments).join(' '));
+        oldConsoleError.apply(console, arguments);
+      };
+      
+      window.addEventListener('error', function(event) {
+        errors.push(`Script error: ${event.message} at ${event.filename}:${event.lineno}`);
+      });
+      
+      setTimeout(function() {
+        const errorsContainer = document.getElementById('console-errors');
+        if (errors.length > 0) {
+          errorsContainer.textContent = errors.join('\n');
+          errorsContainer.className = 'error';
+        } else {
+          errorsContainer.textContent = 'No console errors detected';
+          errorsContainer.className = 'success';
+        }
+      }, 2000);
+    }
+    
+    // Check DOM
+    function checkDOM() {
+      const domCheck = document.getElementById('dom-check');
+      domCheck.textContent = `
+Document ready state: ${document.readyState}
+Root element exists: ${!!document.getElementById('root')}
+Body children count: ${document.body.children.length}
+      `;
+    }
+    
+    // Display environment info
+    function displayEnvironment() {
+      const env = document.getElementById('environment');
+      env.textContent = `
+User Agent: ${navigator.userAgent}
+Window Size: ${window.innerWidth}x${window.innerHeight}
+Device Pixel Ratio: ${window.devicePixelRatio}
+      `;
+    }
+    
+    // Fix links
+    function updateLinks() {
+      // No changes needed as we're already using relative paths
+    }
+    
+    // Run all tests
+    window.onload = function() {
+      displayUrlInfo();
+      testAssetLoading();
+      captureConsoleErrors();
+      checkDOM();
+      displayEnvironment();
+      updateLinks();
+    };
+  </script>
+</body>
+</html> 
