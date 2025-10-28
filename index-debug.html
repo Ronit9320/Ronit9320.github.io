@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Professional Game Development Portfolio showcasing projects, skills, and experience in game development" />
+  <meta name="keywords" content="game development, portfolio, game developer, game design, game programming" />
+  <meta name="author" content="Ronit Shah" />
+
+  <script>
+    (function () {
+      if (sessionStorage.redirect) {
+        var redirectUrl = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        var redirectPath = redirectUrl.split(location.host)[1];
+        if (redirectPath && redirectPath.length > 0) {
+          history.replaceState(null, null, redirectPath);
+        }
+      }
+    })();
+  </script>
+
+  <script type="text/javascript">
+    (function (l) {
+      if (l.search[1] === "/") {
+        var decoded = l.search
+          .slice(1)
+          .split("&")
+          .map(function (s) {
+            return s.replace(/~and~/g, "&");
+          })
+          .join("?");
+        window.history.replaceState(
+          null,
+          null,
+          l.pathname.slice(0, -1) + decoded + l.hash,
+        );
+      }
+    })(window.location);
+  </script>
+
+  <script>
+    window.addEventListener("error", function (e) {
+      console.error(
+        "Global error caught:",
+        e.message,
+        "at",
+        e.filename,
+        ":",
+        e.lineno,
+      );
+
+      if (
+        document.getElementById("root") &&
+        !document.getElementById("root").children.length &&
+        !document.getElementById("error-display")
+      ) {
+        setTimeout(function () {
+          if (
+            !document.getElementById("root").children.length &&
+            !document.getElementById("error-display")
+          ) {
+            var errorDiv = document.createElement("div");
+            errorDiv.id = "error-display";
+            errorDiv.style.padding = "20px";
+            errorDiv.style.margin = "20px";
+            errorDiv.style.backgroundColor = "#f8d7da";
+            errorDiv.style.border = "1px solid #f5c6cb";
+            errorDiv.style.borderRadius = "5px";
+            errorDiv.style.color = "#721c24";
+            errorDiv.innerHTML =
+              "<h2>Application Error</h2>" +
+              "<p>The application failed to initialize. This could be due to:</p>" +
+              "<ul>" +
+              "<li>JavaScript errors during initialization</li>" +
+              "<li>Missing resources</li>" +
+              "<li>Incompatible browser</li>" +
+              "</ul>" +
+              "<p>Please check the browser console for more details or " +
+              '<a href="./debug.html">visit the debug page</a>.</p>';
+            document.body.appendChild(errorDiv);
+          }
+        }, 5000);
+      }
+    });
+  </script>
+
+  <!-- Open Graph  -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="" />
+  <meta property="og:title" content="GameDev Portfolio" />
+  <meta property="og:description"
+    content="Professional Game Development Portfolio showcasing projects, skills, and experience in game development" />
+  <meta property="og:image" content="./og-image.jpg" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="" />
+  <meta property="twitter:title" content="GameDev Portfolio" />
+  <meta property="twitter:description"
+    content="Professional Game Development Portfolio showcasing projects, skills, and experience in game development" />
+  <meta property="twitter:image" content="./og-image.jpg" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="./leaf.svg" />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="icon" href="./assets/favicon-DPtzwQ_D.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <link rel="manifest" href="./site.webmanifest" />
+  <meta name="theme-color" content="#D2691E" />
+
+  <title>Portfolio</title>
+
+  <!-- Preconnect to external resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Press+Start+2P&display=swap"
+    rel="stylesheet" />
+  <script type="module" crossorigin src="./assets/index-NEAW8Ktm.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-GF68MIUg.css">
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <noscript>
+    <div style="
+          padding: 20px;
+          margin: 20px;
+          background-color: #fff3cd;
+          border: 1px solid #ffeeba;
+          border-radius: 5px;
+          color: #856404;
+        ">
+      <h2>JavaScript Required</h2>
+      <p>
+        This website requires JavaScript to function properly. Please enable
+        JavaScript in your browser settings.
+      </p>
+    </div>
+  </noscript>
+
+</body>
+
+</html>
