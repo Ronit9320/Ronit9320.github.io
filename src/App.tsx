@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, Component } from "react";
 import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import "./App.css";
+// import "./App.css";
 import Projects from "./components/Projects";
 import Blog from "./components/Blog";
 import BlogPost from "./components/BlogPost";
@@ -9,10 +9,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import ScrollToTop from "./components/ScrollToTop";
 
-console.log("App.tsx is loading");
-console.log("Current URL:", window.location.href);
-console.log("Current path:", window.location.pathname);
-console.log("Current hash:", window.location.hash);
+
 class ErrorBoundary extends Component<
   { children: React.ReactNode },
   { hasError: boolean; error: Error | null }
@@ -33,33 +30,9 @@ class ErrorBoundary extends Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div
-          style={{
-            padding: "20px",
-            backgroundColor: "#ffdddd",
-            border: "1px solid #ff6666",
-            borderRadius: "5px",
-            margin: "20px",
-            color: "#333",
-          }}
-        >
+        <div style={{ padding: "20px", textAlign: "center" }}>
           <h2>Something went wrong.</h2>
-          <p>{this.state.error?.message || "Unknown error"}</p>
-          <p>{this.state.error?.stack}</p>
-          <button
-            onClick={() => window.location.reload()}
-            style={{
-              padding: "8px 16px",
-              backgroundColor: "#ff6666",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-              marginTop: "10px",
-            }}
-          >
-            Reload Page
-          </button>
+          <button onClick={() => window.location.reload()}>Reload Page</button>
         </div>
       );
     }
@@ -75,7 +48,6 @@ function App() {
   const scrollTimeout = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    console.log("App component mounted");
 
     const mainElement = mainRef.current;
     if (!mainElement) {
@@ -120,33 +92,7 @@ function App() {
         <Router>
           <ScrollToTop />
           <div className="App">
-            <div
-              id="debug-info"
-              style={{
-                position: "fixed",
-                top: 0,
-                right: 0,
-                background: "rgba(0,0,0,0.7)",
-                color: "white",
-                padding: "5px",
-                zIndex: 9999,
-                fontSize: "12px",
-                visibility: "hidden",
-              }}
-            >
-              App is rendering v4
-              <br />
-              Base URL: {window.location.href}
-              <br />
-              Path: {window.location.pathname}
-              <br />
-              Hash: {window.location.hash}
-            </div>
 
-            <div style={{ display: "none" }}>
-              {new Date().toISOString()}
-              {window.location.href}
-            </div>
             <div className="theme-elements">
               <div className="theme-leaf"></div>
               <div className="theme-leaf"></div>
@@ -370,7 +316,11 @@ function App() {
                                   Doing More While Doing Less
                                 </h3>
                                 <p className="blog-excerpt">
-                                  This year's been weird. Good weird, but weird. Starting from January, I went into full "I'll do everything by myself" mode. Built a strict, rigid timetable. Talked to fewer people. Had these huge goals and plans all lined up...
+                                  This year's been weird. Good weird, but weird.
+                                  Starting from January, I went into full "I'll
+                                  do everything by myself" mode. Built a strict,
+                                  rigid timetable. Talked to fewer people. Had
+                                  these huge goals and plans all lined up...
                                 </p>
                                 <Link
                                   to="/blog/doing-more-while-doing-less"
@@ -386,7 +336,10 @@ function App() {
                                   Blogs Every Sunday
                                 </h3>
                                 <p className="text-forest-600 text-center">
-                                  New content is published weekly every Sunday. Next week: How I built Conway's Game of Life in the terminal. Follow for regular updates on game development, programming, and life.
+                                  New content is published weekly every Sunday.
+                                  Next week: How I built Conway's Game of Life
+                                  in the terminal. Follow for regular updates on
+                                  game development, programming, and life.
                                 </p>
                               </div>
                             </div>

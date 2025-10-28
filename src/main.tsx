@@ -3,14 +3,12 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
 
-// Debug information to help diagnose rendering issues
 console.log("main.tsx is executing");
 console.log("Looking for root element:", document.getElementById("root"));
 
-// Error handling for rendering
 try {
   const rootElement = document.getElementById("root");
-  
+
   if (!rootElement) {
     console.error("Root element not found, creating fallback element");
     const fallback = document.createElement("div");
@@ -31,8 +29,7 @@ try {
   }
 } catch (error) {
   console.error("Error rendering React app:", error);
-  
-  // Create fallback content if React fails
+
   const fallbackError = document.createElement("div");
   fallbackError.style.padding = "20px";
   fallbackError.style.margin = "20px";
